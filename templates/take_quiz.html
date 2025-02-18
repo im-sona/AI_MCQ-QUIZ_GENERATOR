@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Take Quiz</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            width: 60%;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px #aaa;
+        }
+        h1 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .mcq {
+            text-align: left;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f7f9fc;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .question {
+            font-size: 18px;
+            font-weight: bold;
+            color: #34495e;
+        }
+        .options {
+            margin-top: 10px;
+        }
+        .option {
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .option:hover {
+            background-color: #f0f0f0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        .feedback {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .score {
+            font-size: 20px;
+            color: #2ecc71;
+            font-weight: bold;
+        }
+        .incorrect {
+            color: #e74c3c;
+        }
+        .mcqs{
+            background: linear-gradient(to right, #2521f3, 
+                    #a008ff, #8723cf, #4458ee); 
+            -webkit-text-fill-color: transparent; 
+            -webkit-background-clip: text;
+            font-weight: bold;
+            transition: all 0.2s ease-in-out;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            
+            <a class="navbar-brand fs-1 fw-bold me-5" href="#"><span class="mcqs">Smart</span> AI</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active fs-5 fw-bold" href="#">Home</a>
+                    <a class="nav-link active fs-5 fw-bold" href="#">About</a>
+                    <a class="nav-link active fs-5 fw-bold" href="#">Contact</a>
+                    <a class="nav-link active fs-5 fw-bold" href="#">Blog</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    </div>  
+    <div class="container">
+        <h1>Take Quiz</h1>
+        <form  method="POST">
+            {% for mcq in mcqs.split("## MCQ") %}
+                {% if mcq.strip() %}
+                    <div class="mcq">
+                        <div class="question">{{ mcq.split('A)')[0].replace('**','').strip() }}</div>
+                        <div class="options">
+                            <label>
+                                <input type="radio" name="question_{{ loop.index }}" value="A">
+                                A) {{ mcq.split('A)')[1].split('B)')[0].strip() }}
+                            </label><br>
+                            <label>
+                                <input type="radio" name="question_{{ loop.index }}" value="B">
+                                B) {{ mcq.split('B)')[1].split('C)')[0].strip() }}
+                            </label><br>
+                            <label>
+                                <input type="radio" name="question_{{ loop.index }}" value="C">
+                                C) {{ mcq.split('C)')[1].split('D)')[0].strip() }}
+                            </label><br>
+                            <label>
+                                <input type="radio" name="question_{{ loop.index }}" value="D">
+                                D) {{ mcq.split('D)')[1].split('Correct Answer:')[0].replace('**','').strip() }}
+                            </label>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            <button class="btn" value="Submit">Submit</button>
+        </form>
+        
+    </div>
+</body>
+</html>
