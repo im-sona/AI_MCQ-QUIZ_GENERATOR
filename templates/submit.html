@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+            text-align: center;
+        }
+        .containers {
+            width: 60%;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px #aaa;
+        }
+        .circle-wrap {
+            width: 150px;
+            height: 150px;
+            background: conic-gradient(#4b00ff {{ percentage }}%, #eee {{ percentage }}%);
+            border-radius: 50%;
+            margin: 20px auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #4b00ff;
+        }
+        .feedback {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .correct { color: #2ecc71; }
+        .incorrect { color: #e74c3c; }
+        .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        .container {
+            width: 60%;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px #aaa;
+        }
+        h1 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .mcq {
+            text-align: left;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f7f9fc;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .question {
+            font-size: 18px;
+            font-weight: bold;
+            color: #34495e;
+        }
+        .options {
+            margin-top: 10px;
+        }
+        .option {
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .option:hover {
+            background-color: #f0f0f0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        .feedback {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .score {
+            font-size: 20px;
+            color: #2ecc71;
+            font-weight: bold;
+        }
+        .incorrect {
+            color: #e74c3c;
+        }
+        .mcqs{
+            background: linear-gradient(to right, #2521f3, 
+                    #a008ff, #8723cf, #4458ee); 
+            -webkit-text-fill-color: transparent; 
+            -webkit-background-clip: text;
+            font-weight: bold;
+            transition: all 0.2s ease-in-out;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            
+            <a class="navbar-brand fs-1 fw-bold me-5" href="#"><span class="mcqs">Smart</span> AI</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active fs-5 fw-bold" href="#">Home</a>
+                    <a class="nav-link active fs-5 fw-bold" href="#">About</a>
+                    <a class="nav-link active fs-5 fw-bold" href="#">Contact</a>
+                    <a class="nav-link active fs-5 fw-bold" href="#">Blog</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    </div>  
+    
+    <div class="containers">
+        <a href="/">Go to Home</a>
+        <h1>Quiz Results</h1>
+
+        <div class="circle-wrap">
+            {{ percentage | round(1) }}%
+        </div>
+
+        <p class="score">Your Score: {{ score }} / {{ total_questions }}</p>
+        <p class="correct">Correct Answers: {{ correct_count }}</p>
+        <p class="incorrect">Incorrect Answers: {{ incorrect_count }}</p>
+
+        {% if percentage >= 80 %}
+            <p class="feedback text-success">🎉 Excellent!</p>
+        {% elif percentage >= 50 %}
+            <p class="feedback text-warning">👍 Good Job!</p>
+        {% else %}
+            <p class="feedback text-danger">😕 Better luck next time!</p>
+        {% endif %}
+
+        <a href="{{ url_for('take_quiz') }}" class="btn">Try Again</a>
+    </div>
+</body>
+</html>

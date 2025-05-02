@@ -1,0 +1,59 @@
+## MCQ 1
+Question: What is the primary objective of the AI-Interview-Mocker project?
+A) To connect users with human interviewers for mock interviews.
+B) To provide keyword-based feedback on pre-defined interview questions.
+C) To design and develop an AI-powered system that simulates real-world interview experiences.
+D) To deliver static question-answering or content delivery for general learning.
+
+Correct Answer: C
+
+Explanation: The project aims to create an AI-driven platform that mimics real interviews, offering dynamic questions, feedback, and analysis, not just connecting users with humans or providing limited feedback.
+
+
+## MCQ 2
+Question: Which technologies are used in the frontend development of the AI-Interview-Mocker?
+A) Java, Spring Boot, MySQL
+B) Python, Flask, MongoDB
+C) Next.js, HTML5, CSS3, JavaScript
+D) C++, Qt, SQLite
+
+Correct Answer: C
+
+Explanation: The text specifically mentions Next.js, HTML5, CSS3, and JavaScript as the frontend technologies.
+
+
+## MCQ 3
+Question: What database is used by the AI-Interview-Mocker system to store user data and interview information?
+A) MySQL
+B) MongoDB
+C) PostgreSQL (via Neon)
+D) SQLite
+
+Correct Answer: C
+
+Explanation:  The text clearly states that Neon, a serverless PostgreSQL solution, is used for data storage.
+
+
+## MCQ 4
+Question: What is a key limitation of existing platforms like InterviewBuddy and Pramp, as identified in the literature survey?
+A) They lack AI-based dynamic feedback and automated evaluation.
+B) They don't offer real-time mock interviews.
+C) They don't allow users to answer questions by speaking or typing.
+D) They don't cover predefined domains.
+
+Correct Answer: A
+
+Explanation: While InterviewBuddy and Pramp offer real-time interviews with humans, they lack the AI-driven feedback and automated analysis provided by AI-Interview-Mocker.
+
+
+## MCQ 5
+Question: What is the purpose of using Gemini API in the AI-Interview-Mocker?
+A) For user authentication and login management.
+B) For storing user data and interview history.
+C) For converting spoken answers into text.
+D) For generating interview questions and analyzing user responses using NLP.
+
+
+Correct Answer: D
+
+Explanation: The text specifies that Gemini API is utilized for dynamic question generation and NLP-based response analysis.

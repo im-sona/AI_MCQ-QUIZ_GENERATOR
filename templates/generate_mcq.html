@@ -15,12 +15,12 @@
         }
         .container {
             width: 80%;
-            max-width: 900px;
+            
             margin: 50px auto;
-            background: #fff;
+           
             padding: 25px;
             border-radius: 12px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            /*box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);*/
             overflow: hidden;
         }
         h1 {
@@ -84,7 +84,7 @@
             .container { width: 95%; padding: 15px; }
         }
         .mcqs{
-            background: linear-gradient(to right, #2521f3, 
+            background: linear-gradient(to right, #0805aa, 
                     #a008ff, #8723cf, #4458ee); 
             -webkit-text-fill-color: transparent; 
             -webkit-background-clip: text;
@@ -92,6 +92,10 @@
             transition: all 0.2s ease-in-out;
             text-align: center;
         }
+        .te{
+            color: #000000;
+        }
+       
     </style>
 </head>
 <body>
@@ -115,7 +119,7 @@
     </nav>
     </div>  
     <div class="container">
-        <h1>Generated MCQs</h1>
+        <h1 class="">Generated MCQs </h1> 
         {% for mcq in mcqs.split("## MCQ") %}
             {% if mcq.strip() %}
                 <div class="mcq">

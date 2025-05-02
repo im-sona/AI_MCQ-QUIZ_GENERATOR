@@ -7,7 +7,7 @@ import google.generativeai as genai
 from fpdf import FPDF  
 
 # Set your API key
-os.environ["GOOGLE_API_KEY"] = "AIzaSyByOODsbsg1NAqhanNM-Z9yUSSHsaReJ2o"  
+os.environ["GOOGLE_API_KEY"] = "AAIzaSyAUz4YTseHi9ob_H3OBm7xq-wX9NaYr6SQ"  
 genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
 model = genai.GenerativeModel("models/gemini-1.5-pro")
 
@@ -149,24 +149,60 @@ def generate():
 def take_quiz():
     quiz_files = [f for f in os.listdir(app.config['QUIZ_FOLDER']) if f.endswith('.txt')]
 
-    print("Available quiz files:", quiz_files)  # Debugging step
-    
     if not quiz_files:
         return "No quizzes available. Please generate MCQs first."
 
     latest_quiz_file = os.path.join(app.config['QUIZ_FOLDER'], quiz_files[-1])
-    print("Using quiz file:", latest_quiz_file)  # Debugging step
 
     with open(latest_quiz_file, 'r', encoding='utf-8') as file:
         quiz_mcqs = file.read()
 
-    if request.method == 'POST':
-        user_answers = {f"question_{i+1}": request.form.get(f"question_{i+1}") for i in range(quiz_mcqs.count('## MCQ'))}
-        return render_template('submit_quiz.html', mcqs=quiz_mcqs)
+    # Dictionary to store correct answers from the file for comparison
+    correct_answers = {}
+    for mcq in quiz_mcqs.split('## MCQ'):
+        if mcq.strip():
+            question = mcq.split('A)')[0].strip()
+            
+            # Check if 'Correct Answer:' is in the MCQ text
+            if 'Correct Answer:' in mcq:
+                correct_answer = mcq.split('Correct Answer:')[1].strip()
+            else:
+                correct_answer = None  # If no correct answer, set to None
 
+            correct_answers[question] = correct_answer
+
+    if request.method == 'POST':
+        user_answers = {f"question_{i+1}": request.form.get(f"question_{i+1}") for i in range(len(correct_answers))}
         
+        # Calculate score
+        score = 0
+        correct_count = 0
+        incorrect_count = 0
+        
+        for i, (question, correct_answer) in enumerate(correct_answers.items()):
+            user_answer = user_answers.get(f"question_{i+1}")
+            if user_answer == correct_answer:
+                score += 1
+                correct_count += 1
+            else:
+                incorrect_count += 1
+
+        total_questions = len(correct_answers)
+        percentage = (score / total_questions) * 100 if total_questions > 0 else 0
+
+        # Pass results to the submit page including percentage
+        return render_template(
+            'submit.html',
+            score=score,
+            correct_count=correct_count,
+            incorrect_count=incorrect_count,
+            total_questions=total_questions,
+            percentage=percentage
+        )
 
     return render_template('take_quiz.html', mcqs=quiz_mcqs)
+
+
 
 
 
