@@ -89,4 +89,4 @@ smart_ai_mcq_generator/
 
 ## 🧑‍💻 Author
 
-Developed by **[Your Name]**
+Developed by **[Sona IM]**
